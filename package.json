@@ -1,0 +1,24 @@
+{
+  "name": "sddb",
+  "version": "1.0.0",
+  "description": "Simple Interface for DDB",
+  "main": "sddb.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cthulhuology/sddb.git"
+  },
+  "keywords": [
+    "DynamoDB",
+    "AWS",
+    "simple"
+  ],
+  "author": "David Goehrig <dave@dloh.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cthulhuology/sddb/issues"
+  },
+  "homepage": "https://github.com/cthulhuology/sddb#readme"
+}
