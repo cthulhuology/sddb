@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Simple Interface for DDB",
   "main": "sddb.mjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +21,5 @@
   "bugs": {
     "url": "https://github.com/cthulhuology/sddb/issues"
   },
-  "homepage": "https://github.com/cthulhuology/sddb#readme"
+  "homepage": "https://github.com/cthulhuology/sddb"
 }
