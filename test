@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+import { fromDDB, toDDB } from './sddb.mjs'
+
+
+const test = async function() {
+	const table = 'test'
+	const foo = { id: 'foo', user: { name : 'dave goehrig', email: 'dave@dloh.org', addresses: [ '742 Evergreen Terrace Springfield TX 12345' ]}}
+	const res = await foo.save(table)
+	console.log("Saved:",res)
+	const bar = await Object.load(table,'foo')	
+	console.log("Loaded:",bar)
+	foo.user.name='bob'
+	await foo.save(table)
+	const bar2 = await Object.load(table,'foo')
+	console.log('Name updated?', 'bob' == bar2.user.name)
+	
+}
+
+test();

@@ -23,6 +23,8 @@
 // SOFTWARE. 
 //
 
+import { sign, credentials } from 'minaws'
+
 const S = (x) => {
 	if (typeof(x) == 'string') return { 'S' : x }
 }
@@ -79,3 +81,43 @@ export const fromDDB = (x) => {
 	return s(x) || n(x) || b(x) || l(x) || m(x) || bool(x)
 }
 
+Object.prototype.save = async function(table, creds, region='eu-central-1') {
+	if (!creds) creds = credentials()
+	const data = {
+		TableName: table,
+		Item: toDDB(this)['M']
+	}
+	const d = new Date()
+	const service = "dynamodb"
+	const method = "POST"
+	const headers = { 
+		"X-Amz-Target": "DynamoDB_20120810.PutItem",
+		'Content-Type': 'application/x-amz-json-1.0' 
+	}
+	const req = new Request(["https://dynamodb.", region,".amazonaws.com"].join(""),
+		{ method, headers })
+	const ddb = await sign(service,region,creds,d,req,JSON.stringify(data))
+	return (await fetch(ddb)).ok
+}
+
+Object.prototype.load = async function(table,id, creds, region='eu-central-1') {
+	if (!creds) creds = credentials()
+	const data = {
+		TableName: table,	
+		Key: { "id" : { "S" : id }}
+	}
+	const d = new Date()
+	const service = "dynamodb"
+	const method = "POST"
+	const headers = { 
+		"X-Amz-Target": "DynamoDB_20120810.GetItem",
+		'Content-Type': 'application/x-amz-json-1.0' 
+	}
+	const req = new Request(["https://dynamodb.", region,".amazonaws.com"].join(""),
+		{ method, headers })
+	const ddb = await sign(service,region,creds,d,req,JSON.stringify(data))
+	
+	const res = await fetch(ddb)
+	const json = await res.json()
+	return fromDDB({ 'M' : json.Item })
+}

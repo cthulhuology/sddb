@@ -5,7 +5,7 @@
   "main": "sddb.mjs",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./test"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/cthulhuology/sddb/issues"
   },
-  "homepage": "https://github.com/cthulhuology/sddb"
+  "homepage": "https://github.com/cthulhuology/sddb",
+  "dependencies" : {
+    "minaws": "git://github.com/cthulhuology/minaws.git"
+  }
 }
